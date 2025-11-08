@@ -34,18 +34,6 @@ const Login = ({ onSignupClick }) => {
         <p className="text-2xl font-semibold">Login</p>
       </div>
 
-      {/* Username */}
-      <div className="flex flex-col gap-1">
-        <label>Username</label>
-        <input
-          {...register("username")}
-          type="text"
-          placeholder="username"
-          className="border rounded-md border-gray-300 px-2 py-1"
-        />
-        <p className="text-red-500 text-sm mt-1">{errors.username?.message}</p>
-      </div>
-
       {/* Email */}
       <div className="flex flex-col gap-1 mt-2">
         <label>Email</label>

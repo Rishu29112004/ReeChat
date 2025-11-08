@@ -6,6 +6,7 @@ import UploadPhoto from './Component/UploadPhoto'
 import Feelings from '../fellings/Feelings'
 import CommentComponent from '../comment-section/CommentComponent'
 import SavedPage from '../SavedPage/SavedPage'
+import MindPostSection from './Component/MindPostSection'
 
 const HomePage = () => {
 
@@ -13,6 +14,7 @@ const HomePage = () => {
     const [isVideo, setIsVideo] = useState(false)
     const [pic, setPic] = useState(false)
     const [feel, setFeel] = useState(false);
+    const [mind, setMind] = useState(false)
     const [openCommentModal, setOpenCommentModal] = useState(false)
     const [commentId, setCommentId] = useState(null);
     const [savedPosts, setSavedPosts] = useState([])
@@ -49,14 +51,10 @@ const HomePage = () => {
                             src="https://storage.googleapis.com/clean-finder-353810/$jGBQARSkY4ASOM5atg3iuZV5KjlNABR7hQxJw4HKr5WMHD02SkP5OD.jpeg"
                             alt="Neon Avatar"
                         />
-                        <input
-                            value={thoughts}
-                            onChange={(e) => setThoughts(e.target.value)}
-                            className="flex-1 px-4 py-2 md:py-3 rounded-full bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0CAF60] transition-all"
-                            placeholder="What's on your mind, Rishu?"
-                            type="text"
-                        />
-                        <button className='font-mono text-xl'>Add</button>
+                        <button
+                        onClick={()=>setMind(!mind)}
+                            className="flex-1 px-4 py-2 md:py-3 rounded-full bg-gray-100 hover:bg-gray-200 hover:border-green-500 hover:border border hover:text-green-500 cursor-pointer"
+                        >What's on your mind, Rishu?</button>
                     </div>
 
 
@@ -79,6 +77,7 @@ const HomePage = () => {
                     <HomePagePosts setSavedPost={handleSavePost} setOpenCommentModal={setOpenCommentModal} setCommentId={setCommentId} />
                 </div>
 
+                {mind && <PopModal onCancel={setMind} Component={<MindPostSection />} heading={"Create post"} />}
                 {isVideo && <PopModal onCancel={setIsVideo} Component={<LiveText />} heading={"video section"} />}
                 {pic && <PopModal onCancel={setPic} Component={<UploadPhoto setPic={setPic} />} OnSubmit={setPic} heading={"Upload Data"} />}
                 {feel && <PopModal onCancel={setFeel} Component={<Feelings />} OnSubmit={setFeel} />}

@@ -2,56 +2,31 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../custom/Button";
 import toast from 'react-hot-toast';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema } from "./Validation/SignupSchema";
 
 const Signup = ({ onLoginClick }) => {
-  const initialValues = { username: "", email: "", password: "" };
-  const [inputValue, setInputValue] = useState(initialValues);
-  const [submitForm, setSubmitForm] = useState(false);
-  const [errors, setErrors] = useState({});
 
-   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue(prev => ({ ...prev, [name]: value }));
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(signupSchema)
+  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validation = validate(inputValue);
-    setErrors(validation);
-    setSubmitForm(true);
-  };
+  const onSubmit = (data) => {
+    toast.success("Signup successful!")
+    reset()
+  }
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && submitForm) {
-      toast.success("Signup successful!");
-    }
-  }, [errors, submitForm]);
-
-     const validate = (value) => {
-        const errors = {}
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!value.username) {
-            errors.username = "username is required!"
-        } else if (value.username.length < 4) {
-            errors.username = "name should be more then 4 character!"
-        }
-        if (!value.email) {
-            errors.email = "email is required!"
-        } else if (!regex.test(value.email)) {
-            errors.email = "This is not valid email format!"
-        }
-        if (!value.password) {
-            errors.password = "password is required!"
-        } else if (value.password.length < 4) {
-            errors.password = "password must be more then 4 characters!"
-        }
-        return errors
-        
-    }
 
   return (
-    <form noValidate
-      onSubmit={handleSubmit}
+    <form
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
       className="w-[320px] p-4 mt-2 font-mono border-2 border-gray-300 rounded-md bg-white"
     >
       <div className="flex items-center justify-center mb-4">
@@ -62,42 +37,36 @@ const Signup = ({ onLoginClick }) => {
       <div className="flex flex-col gap-1 mb-2">
         <label>Username</label>
         <input
-          name="username"
-          value={inputValue.username}
-          onChange={handleChange}
+          {...register("username")}
           placeholder="Enter username"
           type="text"
           className="border rounded-md border-gray-300 px-2 py-1"
         />
-        <p className="text-red-500 text-sm">{errors.username}</p>
+        <p className="text-red-500 text-sm">{errors.username?.message}</p>
       </div>
 
       {/* Email */}
       <div className="flex flex-col gap-1 mb-2">
         <label>Email</label>
         <input
-          name="email"
-          value={inputValue.email}
-          onChange={handleChange}
+          {...register("email")}
           placeholder="Enter email"
           type="email"
           className="border rounded-md border-gray-300 px-2 py-1"
         />
-        <p className="text-red-500 text-sm">{errors.email}</p>
+        <p className="text-red-500 text-sm">{errors.email?.message}</p>
       </div>
 
       {/* Password */}
       <div className="flex flex-col gap-1 mb-3">
         <label>Password</label>
         <input
-          name="password"
-          value={inputValue.password}
-          onChange={handleChange}
+          {...register("password")}
           placeholder="Set password"
           type="password"
           className="border rounded-md border-gray-300 px-2 py-1"
         />
-        <p className="text-red-500 text-sm">{errors.password}</p>
+        <p className="text-red-500 text-sm">{errors.password?.message}</p>
       </div>
 
       {/* Submit button */}
