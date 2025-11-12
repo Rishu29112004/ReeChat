@@ -59,15 +59,15 @@ const HomePage = () => {
 
 
                     <div className='flex border-t flex-wrap items-center p-3 rounded-b-md border-gray-200 justify-around gap-2 md:gap-4 bg-gray-100'>
-                        <div onClick={() => setIsVideo(!isVideo)} className='flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors'>
+                        <div onClick={() => setIsVideo(!isVideo)} className='flex hover:border-green-500 border-gray-100 border items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors'>
                             <Video className='text-green-500' size={20} />
                             <p className="font-mono font-semibold text-gray-700">Live video</p>
                         </div>
-                        <div className='flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors' onClick={() => setPic(!pic)}>
+                        <div className='flex hover:border-green-500 border-gray-100 border items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors' onClick={() => setPic(!pic)}>
                             <BookImage className='text-green-500' size={20} />
                             <p className="font-mono font-semibold text-gray-700">Photo/video</p>
                         </div>
-                        <div className='flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors' onClick={() => setFeel(!feel)}>
+                        <div className='flex hover:border-green-500 border-gray-100 border items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded-lg transition-colors' onClick={() => setFeel(!feel)}>
                             <Smile className='text-green-500' size={20} />
                             <p className="font-mono font-semibold text-gray-700">Feeling/activity</p>
                         </div>
