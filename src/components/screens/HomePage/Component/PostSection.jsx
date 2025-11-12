@@ -3,16 +3,22 @@ import React, { useEffect, useState } from 'react'
 
 const PostSection = ({ setOpenCommentModal, setCommentId, setSavedPost }) => {
   const [posts, setPosts] = useState([]);
-  const [showDelete,setShowDelete]=useState(false)
+  const [showDelete, setShowDelete] = useState(false)
 
   useEffect(() => {
     const post = JSON.parse(localStorage.getItem("postData")) || [];
     setPosts(post);
   }, []);
- 
-  const handleDelete=(id)=>{
-    setShowDelete((prev)=>prev===id?null:id)
-  }
+
+
+
+  const handleDeletePost = (index) => {
+  const updatedPosts = posts.filter((_, i) => i !== index);
+  setPosts(updatedPosts);
+  localStorage.setItem("postData", JSON.stringify(updatedPosts));
+  setShowDelete(null);
+};
+
 
   return (
     <div className="flex flex-col gap-4">
@@ -33,13 +39,13 @@ const PostSection = ({ setOpenCommentModal, setCommentId, setSavedPost }) => {
             </div>
             <div className=" flex relative items-center gap-2">
               <button className="p-1 relative hover:bg-gray-100 rounded-full transition-colors">
-                <Ellipsis onClick={()=>handleDelete(index)} className="text-gray-600" size={20} />
+                <Ellipsis onClick={()=>setShowDelete((prev) => prev === index ? null : index)} className="text-gray-600" size={20} />
               </button>
               {showDelete === index && (
-                <div className='bg-red-500   shadow-md w-[150px] text-center rounded-md p-2 absolute right-1/9 top-5 -traslate-y-1/2'>
-                           <p className='font-bold '>Delete</p>
+                <div onClick={() => handleDeletePost(index)} className='bg-gray-100 shadow-md px-3 py-1 cursor-pointer hover:text-red-500 text-center rounded-md absolute right-8'>
+                  <p className='font-medium'>Delete</p>
                 </div>
-                 )}
+              )}
             </div>
           </div>
 

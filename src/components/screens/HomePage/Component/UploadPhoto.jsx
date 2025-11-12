@@ -86,7 +86,7 @@ const UploadPhoto = ({setPic}) => {
                 </div>
 
                 {/* Submit */}
-                <Button type={"submit"} className=""/>
+                <Button type={"submit"} className="" buttonName={"post"}/>
             </div>
         </form>
     );

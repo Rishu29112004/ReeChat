@@ -8,6 +8,9 @@ import VideoPage from "./components/screens/VideoPage/VideoPage";
 import PopModal from "./components/custom/PopModal";
 import SavedPage from "./components/screens/SavedPage/SavedPage";
 import { Toaster } from "react-hot-toast";
+// import ProfileDetails from "./components/screens/ProfileDetails/ProfileDetails";
+import ProfilePage from "./components/screens/ProfileDetails/ProfilePage";
+import ProfileLayout from "./components/layout/ProfileLayout";
 
 function App() {
   return (
@@ -17,11 +20,16 @@ function App() {
         {/* All routes inside Layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/friend" element={<FriendsPage />} />
+          <Route path="/friend" element={<FriendsPage/>} />
           <Route path="/video" element={<VideoPage />} />
           <Route path="/saved" element={<SavedPage />} />
           <Route path="/pop" element={<PopModal />} />
         </Route>
+        {/* ✅ Profile layout with only topbar */}
+        <Route element={<ProfileLayout />}>   
+          <Route path="/friend/:id" element={<ProfilePage />} />
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );
