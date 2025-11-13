@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 // import ProfileDetails from "./components/screens/ProfileDetails/ProfileDetails";
 import ProfilePage from "./components/screens/ProfileDetails/ProfilePage";
 import ProfileLayout from "./components/layout/ProfileLayout";
+import Rohit from "./components/screens/ProfileDetails/Rohit";
 
 function App() {
   return (
