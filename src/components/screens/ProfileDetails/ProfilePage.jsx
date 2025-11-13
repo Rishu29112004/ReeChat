@@ -4,9 +4,9 @@ import { ProfilePageData } from './ProfilePageData';
 const ProfilePage = () => {
 
     const { id } = useParams(); // Assuming the route is defined as path="/products/:id"
-    console.log(id);
 
-    const userdata = ProfilePageData.find((profile) => profile.id == id)
+
+    const userdata = ProfilePageData.find((profile) => profile.id === Number(id))
     console.log(userdata)
     return (
         <div className='min-h-screen w-full bg-white'>

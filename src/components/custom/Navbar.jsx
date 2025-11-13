@@ -32,9 +32,9 @@ const Navbar = () => {
       setSuggestions([]);
       return;
     }
-    const q = searchTerm.trim().toLowerCase();
+    const q = searchTerm.trim().toLowerCase(); // Roh=> rohi ,roh, roh ,roh
     const filtered = ProfilePageData
-      .filter((f) => f.name.toLowerCase().includes(q))
+      .filter((f) => f.name.toLowerCase().includes(q)) //' rohit.incudes(rohit)
       .slice(0, 6);
     setSuggestions(filtered);
   }, [searchTerm]);
